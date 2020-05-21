@@ -1,0 +1,27 @@
+/* 個々の場所の情報を記述してある div 要素 */
+.map_info {
+  margin-bottom: 50px;
+}
+.lat, .lng, .zoom {   /* 緯度・経度、ズームレベルを記載した要素（非表示） */
+  display: none;
+}
+#map_container {   /* 地図のコンテナ */
+  clear: both;
+  width: 90%;
+  padding: 4px;
+  border: 1px solid #CCC;
+  display: none;   /* 最初は非表示 */
+}
+#map_canvas {   /* 地図を表示する要素 幅と高さを指定 */
+  width: 100%;
+  height: 400px;
+  display: none;   /* 最初は非表示 */
+}
+.map_info p.web {
+  display: none;  /* 情報ウィンドウにのみ表示 */
+}
+/* 情報ウィンドウ（マーカーをクリックすると表示される領域） */
+#map_content {
+  width: 250px;
+  height: 70px;
+}
