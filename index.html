@@ -1,142 +1,142 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<!--緯度（lat）と経度（lng）は https://google-developers.appspot.com/maps/documentation/utils/geocoder/?hl=ja で住所を入力して確認します-->
-<div class="map_info">
-    <p class="venue">東京スカイツリー</p>
-    <p class="address">〒131-0045 東京都墨田区押上１−１−２</p>
-    <p class="lat">35.710033</p>
-    <p class="lng">139.810716</p>
-    <p class="web"><a href="http://www.tokyo-skytree.jp/" target="_blank">www.tokyo-skytree.jp</a></p>
-    <p class="zoom">15</p>
-    <p class="show_map"><a href="#">地図を表示</a></p>
-</div>
-<div class="map_info">
-    <p class="venue">東京タワー</p>
-    <p class="address">〒105-0011 東京都港区芝公園４−２−８</p>
-    <p class="lat">35.658593</p>
-    <p class="lng">139.745441</p>
-    <p class="web"><a href="http://www.tokyotower.co.jp/index.html" target="_blank">www.tokyotower.co.jp</a></p>
-    <p class="zoom">16</p>
-    <p class="show_map"><a href="#">地図を表示</a></p>
-</div>
-<div class="map_info">
-    <p class="venue">東京駅</p>
-    <p class="address">東京都千代田区丸の内1丁目</p>
-    <p class="lat">35.681167</p>
-    <p class="lng">139.767052</p>
-    <p class="web"><a href="http://www.jreast.co.jp/estation/station/info.aspx?StationCd=1039" target="_blank">www.jreast.co.jp</a></p>
-    <p class="zoom">18</p>
-    <p class="show_map"><a href="#">地図を表示</a></p>
-</div>
-<div id="map_container">
-    <div id="map_canvas"></div>
-</div>
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBckETp2sntfB4ZgU5CMiM_GAQYl2E_jvo"></script>
-<!-- 順番に読み込まれる必要があるので「async defer」は指定しない。YOUR_API_KEYの部分は取得した APIキーで置き換えます。 --> 
-<script>
-jQuery(function($){
-var map, map_center;
-function showMap(_address, _lat, _lng, _title, _url, _zoom) {
-    //表示領域は CSS で非表示にしてあるので表示に
-    $("#map_canvas").css('display', 'block');
-    
-    //地図の中心位置（引数 _lat, _lng から生成）
-    map_center = new google.maps.LatLng(_lat, _lng);
-    
-    //マップ生成のオプション
-    var opts = {
-    //地図の中心
-    center: map_center,
-    //初期のズーム レベル
-    zoom: _zoom ,
-    //初期マップ タイプ  
-    mapTypeId: "roadmap"
-    };
-    
-    //マップのインスタンスを生成
-    map = new google.maps.Map(document.getElementById("map_canvas"), opts);
-    
-    //マーカーのインスタンスを生成
-    var marker = new google.maps.Marker({
-    //マーカーを配置する Map オブジェクトを指定
-    map: map,
-    //マーカーの初期の場所を示す LatLng を指定  
-    position: map_center,  
-    //マーカーをアニメーションで表示
-    animation: google.maps.Animation.DROP,  
-    title:_title
-    });
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <!--緯度（lat）と経度（lng）は https://google-developers.appspot.com/maps/documentation/utils/geocoder/?hl=ja で住所を入力して確認します-->
+  <div class="map_info">
+      <p class="venue">東京スカイツリー</p>
+      <p class="address">〒131-0045 東京都墨田区押上１−１−２</p>
+      <p class="lat">35.710033</p>
+      <p class="lng">139.810716</p>
+      <p class="web"><a href="http://www.tokyo-skytree.jp/" target="_blank">www.tokyo-skytree.jp</a></p>
+      <p class="zoom">15</p>
+      <p class="show_map"><a href="#">地図を表示</a></p>
+  </div>
+  <div class="map_info">
+      <p class="venue">東京タワー</p>
+      <p class="address">〒105-0011 東京都港区芝公園４−２−８</p>
+      <p class="lat">35.658593</p>
+      <p class="lng">139.745441</p>
+      <p class="web"><a href="http://www.tokyotower.co.jp/index.html" target="_blank">www.tokyotower.co.jp</a></p>
+      <p class="zoom">16</p>
+      <p class="show_map"><a href="#">地図を表示</a></p>
+  </div>
+  <div class="map_info">
+      <p class="venue">東京駅</p>
+      <p class="address">東京都千代田区丸の内1丁目</p>
+      <p class="lat">35.681167</p>
+      <p class="lng">139.767052</p>
+      <p class="web"><a href="http://www.jreast.co.jp/estation/station/info.aspx?StationCd=1039" target="_blank">www.jreast.co.jp</a></p>
+      <p class="zoom">18</p>
+      <p class="show_map"><a href="#">地図を表示</a></p>
+  </div>
+  <div id="map_container">
+      <div id="map_canvas"></div>
+  </div>
 
-    //情報ウィンドウに表示するコンテンツを作成
-    //_urlが指定してあればリンクつきのタイトルを表示（URLがない場合もあるため）
-    var _content;
-    if (_url) {
-    _content = '<div id="map_content"><p><a href="' 
-    + _url + '" target="_blank"> ' + _title + '</a><br />' 
-    + _address + '</p></div>';
-    }else {
-    //_urlが指定してなければ、リンクなしのタイトルと住所を表示
-    _content = '<div id="map_content"><p>' 
-    + _title + '<br />' 
-    + _address + '</p></div>';
-    }
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBckETp2sntfB4ZgU5CMiM_GAQYl2E_jvo"></script>
+  <!-- 順番に読み込まれる必要があるので「async defer」は指定しない。YOUR_API_KEYの部分は取得した APIキーで置き換えます。 -->
+    <script>
+      jQuery(function($){
+        var map, map_center;
+        function showMap(_address, _lat, _lng, _title, _url, _zoom) {
+            //表示領域は CSS で非表示にしてあるので表示に
+            $("#map_canvas").css('display', 'block');
 
-    //情報ウィンドウのインスタンスを生成
-    var infowindow = new google.maps.InfoWindow({
-    content: _content,
-    });
+            //地図の中心位置（引数 _lat, _lng から生成）
+            map_center = new google.maps.LatLng(_lat, _lng);
 
-    //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
-    marker.addListener('click', function() {
-    //第2引数にマーカーを指定して紐付け
-    infowindow.open(map, marker);
-    }); 
-}
+              //マップ生成のオプション
+              var opts = {
+              //地図の中心
+              center: map_center,
+              //初期のズーム レベル
+              zoom: _zoom ,
+              //初期マップ タイプ
+              mapTypeId: "roadmap"
+            };
 
-$('p.show_map a').click(function() {
-    //closeクラスが付与されていれば、地図が表示されているので非表示に
-    if($(this).hasClass('close')) {
-    $('#map_canvas').css('display', 'none');
-    $('#map_container').css('border-width', 0).fadeOut(500);
-    $('p.show_map a').removeClass('close').text('地図を表示');
-    }else{
-    //リンクの文字「地図を表示」を「地図を閉じる」に変更
-    $(this).addClass('close').text('地図を閉じる');
-    //それ以外のリンクは「地図を表示」に（別の地図が閉じられていない場合があるため）
-    $('p.show_map a').not(this).removeClass('close').text('地図を表示');
-    //map_infoクラスの div 要素のインスタンスを変数に代入
-    var map_info$ = $(this).closest('.map_info');
-    //緯度・経度の取得
-    var lat =parseFloat( map_info$.find(".lat").text());
-    var lng =parseFloat( map_info$.find(".lng").text());
-    //map_infoクラスの div 要素に地図を表示する領域を移動 append
-    map_info$.append($('#map_container'));
-    var address = map_info$.find('p.address').text();
-    //console.log(address);
-    if(map_info$.find('p.web').text() != '') {
-        var url = map_info$.find('p.web a').attr('href');
-    }
-    //地図を表示する領域に枠線を付けてフェードインで表示
-    $('#map_container').css('border-width', '1px').fadeIn(1000);
-    //zoom を取得
-    var zoom = map_info$.find(".zoom").text() ?  parseInt(map_info$.find(".zoom").text()): 16;
-    //マーカーのタイトル
-    var title = map_info$.find('p.venue').text();
-    //地図を表示
-    showMap(address, lat, lng, title, url, zoom);
-    }
-    return false;
-});
-}); 
-</script> 
-</body>
+            //マップのインスタンスを生成
+            map = new google.maps.Map(document.getElementById("map_canvas"), opts);
+
+            //マーカーのインスタンスを生成
+            var marker = new google.maps.Marker({
+              //マーカーを配置する Map オブジェクトを指定
+              map: map,
+              //マーカーの初期の場所を示す LatLng を指定
+              position: map_center,
+              //マーカーをアニメーションで表示
+              animation: google.maps.Animation.DROP,
+              title:_title
+            });
+
+            //情報ウィンドウに表示するコンテンツを作成
+            //_urlが指定してあればリンクつきのタイトルを表示（URLがない場合もあるため）
+            var _content;
+            if (_url) {
+              _content = '<div id="map_content"><p><a href="'
+              + _url + '" target="_blank"> ' + _title + '</a><br />'
+              + _address + '</p></div>';
+            } else {
+            //_urlが指定してなければ、リンクなしのタイトルと住所を表示
+              _content = '<div id="map_content"><p>'
+              + _title + '<br />'
+              + _address + '</p></div>';
+            }
+
+            //情報ウィンドウのインスタンスを生成
+            var infowindow = new google.maps.InfoWindow({
+              content: _content,
+            });
+
+            //marker をクリックすると情報ウィンドウを表示(リスナーの登録）
+            marker.addListener('click', function() {
+              //第2引数にマーカーを指定して紐付け
+              infowindow.open(map, marker);
+            });
+        }
+
+        $('p.show_map a').click(function() {
+            //closeクラスが付与されていれば、地図が表示されているので非表示に
+            if($(this).hasClass('close')) {
+              $('#map_canvas').css('display', 'none');
+              $('#map_container').css('border-width', 0).fadeOut(500);
+              $('p.show_map a').removeClass('close').text('地図を表示');
+            } else {
+            //リンクの文字「地図を表示」を「地図を閉じる」に変更
+              $(this).addClass('close').text('地図を閉じる');
+              //それ以外のリンクは「地図を表示」に（別の地図が閉じられていない場合があるため）
+              $('p.show_map a').not(this).removeClass('close').text('地図を表示');
+              //map_infoクラスの div 要素のインスタンスを変数に代入
+              var map_info$ = $(this).closest('.map_info');
+              //緯度・経度の取得
+              var lat =parseFloat( map_info$.find(".lat").text());
+              var lng =parseFloat( map_info$.find(".lng").text());
+              //map_infoクラスの div 要素に地図を表示する領域を移動 append
+              map_info$.append($('#map_container'));
+              var address = map_info$.find('p.address').text();
+              //console.log(address);
+              if(map_info$.find('p.web').text() != '') {
+                  var url = map_info$.find('p.web a').attr('href');
+              }
+              //地図を表示する領域に枠線を付けてフェードインで表示
+              $('#map_container').css('border-width', '1px').fadeIn(1000);
+              //zoom を取得
+              var zoom = map_info$.find(".zoom").text() ?  parseInt(map_info$.find(".zoom").text()): 16;
+              //マーカーのタイトル
+              var title = map_info$.find('p.venue').text();
+              //地図を表示
+              showMap(address, lat, lng, title, url, zoom);
+            }
+            return false;
+        });
+      });
+    </script>
+  </body>
 </html>
